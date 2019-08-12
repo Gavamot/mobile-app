@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Nav, NavItem, NavLink, Progress, TabContent, TabPane, ListGroup, ListGroupItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-class DefaultAside extends Component {
+class DefaultAside extends React.Component {
 
   constructor(props) {
     super(props);
