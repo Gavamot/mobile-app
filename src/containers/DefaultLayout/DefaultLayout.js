@@ -17,14 +17,16 @@ import {
 // sidebar nav config
 import navigation from '../../_nav';
 // routes config
-import routes from '../../routes';
+import routesConfig from '../../routes';
+import history from 'history'
+
+const routes = routesConfig.routes;
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
-
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   signOut(e) {
@@ -36,8 +38,8 @@ class DefaultLayout extends Component {
     return (
       <div className="app">
         <AppHeader fixed>
-          <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+          <Suspense fallback={this.loading()}>
+            <DefaultHeader onLogout={e => this.signOut(e)}/>
           </Suspense>
         </AppHeader>
         <div className="app-body">
@@ -66,7 +68,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                 <Redirect from="/" to={ routesConfig.defaultRout.path } />
                 </Switch>
               </Suspense>
             </Container>

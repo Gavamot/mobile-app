@@ -5,7 +5,9 @@ import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/reac
 import logo from '../../assets/img/brand/logo.svg'
 import * as router from 'react-router-dom';
 import { AppBreadcrumb2 as AppBreadcrumb } from '@coreui/react';
-import routes from '../../routes';
+import routesConfig from '../../routes';
+
+let routes = routesConfig.routes;
 
 const propTypes = {
   children: PropTypes.node,

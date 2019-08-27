@@ -1,4 +1,4 @@
-import crud from './crudReduser'
+import crud from './CrudReduser'
 
 export default {
   crud

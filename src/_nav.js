@@ -1,102 +1,64 @@
-export default {
+import polyglot from './localization'
+import appPaths from './appPaths'
+import { get } from 'https';
+
+const getTitel = (title) => {
+  return {
+    title: true,
+    name: polyglot.t(title),
+    wrapper: {            // optional wrapper object
+      element: '',        // required valid HTML5 element tag
+      attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+    },
+    class: ''             // optional class names space delimited list for title item ex: "text-center"
+  }
+};
+
+const getItem = (item, icon) => {
+  return {
+    ...item,
+    url : item.path,
+    icon
+  }
+}
+
+const getItemWithChildren = (title, icon, ...children) => {
+  return {
+    name: polyglot.t(title),
+    icon,
+    children
+  }
+}
+
+const nav = {
   items: [
-    // {
-    //   name: 'Dashboard',
-    //   url: '/dashboard',
-    //   icon: 'icon-speedometer',
-    //   badge: {
-    //     variant: 'info',
-    //     text: 'Vasia',
-    //   },
-    // },
-    {
-      title: true,
-      name: 'Мониторинг',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
-      },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
-    },
-    {
-      name: 'Соединение устройств',
-      url: '/theme/colors',
-      icon: 'icon-screen-desktop',
-    },
-    {
-      name: 'Панель бригад',
-      url: '/theme/typography',
-      icon: 'icon-map',
-    },
-    {
-      name: 'GPS-позиционирование',
-      url: '/theme/desktop',
-      icon: 'icon-compass',
-    },
-    {
-      name: 'Видеопанель',
-      url: '/theme/desktop2',
-      icon: 'icon-camrecorder',
-    },
-    {
-      name: 'Тренды',
-      url: '/theme/desktop3',
-      icon: 'icon-graph',
-    },
-    {
-      title: true,
-      name: 'Архивы',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
-    },
-    {
-      name: 'Архив по бригаде',
-      url: '/theme/desktop4',
-      icon: 'icon-chart',
-    },
-    // {
-    //   name: 'Buttons',
-    //   url: '/buttons',
-    //   icon: 'icon-cursor',
-    //   children: [
-    //     {
-    //       name: 'Buttons',
-    //       url: '/buttons/buttons',
-    //       icon: 'icon-cursor',
-    //     },
-    //     {
-    //       name: 'Button dropdowns',
-    //       url: '/buttons/button-dropdowns',
-    //       icon: 'icon-cursor',
-    //     },
-    //     {
-    //       name: 'Button groups',
-    //       url: '/buttons/button-groups',
-    //       icon: 'icon-cursor',
-    //     },
-    //     {
-    //       name: 'Brand Buttons',
-    //       url: '/buttons/brand-buttons',
-    //       icon: 'icon-cursor',
-    //     },
-    //   ],
-    // },
-    // {
-    //   name: 'Download CoreUI',
-    //   url: 'https://coreui.io/react/',
-    //   icon: 'icon-cloud-download',
-    //   class: 'mt-auto',
-    //   variant: 'success',
-    //   attributes: { target: '_blank', rel: "noopener" },
-    // },
-    // {
-    //   name: 'Try CoreUI PRO',
-    //   url: 'https://coreui.io/pro/react/',
-    //   icon: 'icon-layers',
-    //   variant: 'danger',
-    //   attributes: { target: '_blank', rel: "noopener" },
-    // },
+    getTitel('nav.monitoringTitle')
+      ,getItem(appPaths.navMonitoringDevicesConnnection, 'icon-screen-desktop')
+      ,getItem(appPaths.navMonitoringBrigadePanel, 'icon-map')
+      ,getItem(appPaths.navMonitoringGps, 'icon-compass')
+      ,getItem(appPaths.navMonitoringVideoPanel, 'icon-camrecorder')
+      ,getItem(appPaths.navMonitoringTrend, 'icon-graph')
+
+    ,getTitel('nav.archiveTitle')
+      ,getItem(appPaths.navArchiveBrigade, 'icon-chart')
+
+    ,getTitel('nav.otherTitle')
+    ,getItemWithChildren('nav.catalogTitle', 'icon-notebook'
+        ,getItem(appPaths.navCatalogDepartment, 'fa fa-bank')
+        ,getItem(appPaths.navCatalogField, 'fa fa-object-group')
+        ,getItem(appPaths.navCatalogCluster, 'fa fa-map')
+        ,getItem(appPaths.navCatalogWell, 'fa fa-tachometer')
+        ,getItem(appPaths.navCatalogBrigade, 'fa fa-group')
+        ,getItem(appPaths.navCatalogWork, 'fa fa-gavel')
+        ,getItem(appPaths.navCatalogRegistrator, 'fa fa-cogs')
+        ,getItem(appPaths.navCatalogUser, 'fa fa-user')
+    )
+
+    ,getTitel('nav.adminTitle')
+      ,getItem(appPaths.navAdminSevice, 'fa fa-server')
+      ,getItem(appPaths.navAdminReport, 'fa fa-file-text')
+      ,getItem(appPaths.navAdminLicense, 'fa fa-money')
   ],
 };
+
+export default nav;
