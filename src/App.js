@@ -5,6 +5,10 @@ import { HashRouter, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import 'font-awesome/css/font-awesome.min.css'
 
+import 'devextreme/dist/css/dx.common.css'
+import 'devextreme/dist/css/dx.light.css'
+import 'devextreme/dist/css/dx.material.teal.light.css'
+
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
 // Containers

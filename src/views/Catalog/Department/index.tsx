@@ -5,25 +5,62 @@ import CrudEntrys from 'store/CrudEntetys';
 import store from 'store';
 import { CrudState } from 'store/reducers/CrudModels';
 import { connect } from 'react-redux'
+import { TreeList, Editing, Column, ValidationRule, Lookup } from 'devextreme-react/tree-list';
 
 const ActionCreator : CrudActionCreatorGenerator = new CrudActionCreatorGenerator(CrudEntrys.DEPARTMENT);
+
+const popupOptions = {
+  title: 'Employee Info',
+  showTitle: true,
+  width: 700,
+  position: { my: 'top', at: 'top', of: window }
+};
+
+const expandedRowKeys = [1];
+
+const style = {
+
+}
+
 class Department extends Component<CrudState> {
 
-  render() {
-    let items;
-    if(this.props.items){
-      items = this.props.items.map(x=>
-        <div key={`crud_department_${x.id}`}>
-          <div>{x.id}</div>
-          <div>{x.name}</div>
-        </div>
-      );
-    }
+  componentWillMount(){
+    store.dispatch(ActionCreator.getAllReq());
+  }
 
+  render() {
+
+    const lookupData = {
+      store: this.props.items,
+      sort: 'name'
+    };
+
+    console.log(this.props);
     return (
-      <div className="animated fadeIn">
-        <button type="reset" onClick={ e => store.dispatch(ActionCreator.getAllReq()) } >Получить данные</button>
-        {items}
+      <div>
+        <TreeList
+          className=""
+          columnAutoWidth={true}
+          showRowLines={true}
+          showBorders={true}
+          keyExpr={'id'}
+          parentIdExpr={'parentId'}
+          defaultExpandedRowKeys={expandedRowKeys}
+          dataSource={this.props.items}
+         >
+         <Editing allowUpdating={true}
+                  allowDeleting={true} allowAdding={true} popup={popupOptions} mode={'popup'} />
+          <Column dataField={'id'} caption={'id'}>
+            <ValidationRule type={'required'} />
+          </Column>
+          <Column dataField={'name'} caption={'наименование'}>
+            <ValidationRule type={'required'} />
+          </Column>
+          <Column visible={false} dataField={'parentId'} caption={'parentId'}>
+              <Lookup dataSource={lookupData} valueExpr={'id'} displayExpr={'name'} />
+              <ValidationRule type={'required'} />
+          </Column>
+        </TreeList>
       </div>
     );
   }

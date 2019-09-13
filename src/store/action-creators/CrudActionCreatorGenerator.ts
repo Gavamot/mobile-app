@@ -13,7 +13,7 @@ export default class CrudActionCreatorGenerator {
   }
 
   public getAllReq() { return generateAction(this.crud.GET_ALL_REQ); }
-  public getAllOk(payload)  { return generateAction(this.crud.GET_ALL_OK); }
+  public getAllOk(payload)  { return generateAction(this.crud.GET_ALL_OK, payload); }
   public getAllCancel() { return generateAction(this.crud.GET_ALL_CANCEL); }
 
 
